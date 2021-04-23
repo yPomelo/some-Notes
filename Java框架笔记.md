@@ -12,7 +12,7 @@
     git init
     git add README.md
     git commit -m "first commit"
-    git remote add origin git@github.com:xxxx.git
+    git remote add origin git@github.com:xxxx.git #连接到远程的仓库
     git push -u origin master
 ```
 ### 3、 提交代码
@@ -44,7 +44,132 @@ git checkout -b 切换b分支
 git branch -dg
 ```
 
+### 6、本地上传文件到码云
 
+首先你需要创建一个仓库，比如我的是partner，代码选择公开public，其它选项默认就好了。
+在本地电脑随便创建一个文件夹，比如我的是partner,然后使用git bash，输入命令git init
+在partner文件中创建一个文件，比如readme.txt：内容随便
+再使用git add readme.txt、git commit -m "my git" 上传到git仓库 
+再使用git remote add origin git@gitee.com:username/repositroy ,username：是你的用户名，repository是你建的仓库
+再使用git pull --rebase 仓库url，保持git仓库与码云仓库一致
+再使用git push gitee master 上传到远程仓库，打开码云查看仓库，就有你的文件了
+
+### 7、创建新仓库的指令
+
+git init //把这个目录变成Git可以管理的仓库
+git add README.md //文件添加到仓库
+git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了 
+git commit -m "first commit" //把文件提交到仓库
+git remote add origin git@github.com:yourname/youremail.git //关联远程仓库
+git push -u origin master //把本地库的所有内容推送到远程库上
+
+### 8、git连接gitee笔记
+
+#### #首先参照
+
+https://blog.csdn.net/zhangyu4863/article/details/80427289
+
+#### #然后需要注意，在办公室无法使用 git remote add origin git@gitee.com:你的gitee用户名/仓库名.git
+
+#### 可以参照如下链接教程中的切换成 https协议连接github
+
+https://blog.csdn.net/s740556472/article/details/80318886
+
+#### 切换成 https协议连接github
+
+依然是先查看当前远程仓库使用的那种协议连接：
+
+```
+$ git remote -v
+origin  git@github.com:unlimitbladeworks/Data-Struts-Learning.git (fetch)
+origin  git@github.com:unlimitbladeworks/Data-Struts-Learning.git (push)
+```
+
+移除掉远程仓库的配置
+
+```
+$ git remote rm origin
+```
+
+重新添加新的远程仓库，以https的形式：
+
+```
+git remote add origin https://github.com/unlimitbladeworks/Data-Struts-Learning.git
+```
+
+再次查看:
+
+```
+$ git remote -v
+origin  https://github.com/unlimitbladeworks/Data-Struts-Learning.git (fetch)
+origin  https://github.com/unlimitbladeworks/Data-Struts-Learning.git (push)
+```
+
+ 
+
+#### #最后遇到的问题是git push没有报错， 但是远程仓库没有更新的问题，可以使用如下指令：
+
+[![复制代码](https://common.cnblogs.com/images/copycode.gif)](javascript:void(0);)
+
+```
+ $ git checkout master  
+
+ $ git merge rowsizectrl(这里换成你的分支名字)
+
+ $ git branch -d rowsizectrl ##当前分支已经没用了，记得删除，如果你还要用就不要删除了
+
+ $ git push -u origin master 
+```
+
+[![复制代码](https://common.cnblogs.com/images/copycode.gif)](javascript:void(0);)
+
+参考链接为https://blog.csdn.net/yban10032/article/details/81903675
+
+####  #补充下，换台电脑拉取远程库的操作
+
+$git pull
+
+参考链接
+
+https://blog.csdn.net/QH_JAVA/article/details/77760499
+
+ 
+
+#### #补充， git基本操作语法
+
+https://www.cnblogs.com/gavincoder/p/9073368.html
+
+#### #补充，git commit弹出Please enter a commit message to explain why this merge is necessary.
+
+https://www.cnblogs.com/quan-coder/p/8478015.html
+
+ 
+
+#### #补充,git远程分支与本地分支合并
+
+https://blog.csdn.net/xiasohuai/article/details/81980112
+
+ 
+
+\#补充Git - git config 查看配置信息
+
+查看系统config
+
+```
+git config --system --list
+```
+
+查看当前用户（global）配置
+
+```
+git config --global  --list
+```
+
+查看当前仓库配置信息
+
+```
+git config --local  --list
+```
 
 ## IDEA
 
