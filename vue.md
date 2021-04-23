@@ -31,7 +31,7 @@
 
 v-bind:message 在标签内绑定一个值  有点像{{message}}
 
-```
+```html
 <div id = "app">
     <span v-bind:title="message"> 鼠标悬浮会有字吗 </span>
     {{message}}
@@ -108,6 +108,8 @@ v-bind:message 在标签内绑定一个值  有点像{{message}}
 在浏览器控制台输入app4.todos.push({text:"yyy"})  会增加  4.yyy
 
 # v-on
+
+v-on = @
 
 为了让用户和你的应用进行交互，我们可以用 `v-on` 指令添加一个事件监听器，通过它调用在 Vue 实例中定义的方法
 
@@ -200,3 +202,55 @@ v-bind:message 在标签内绑定一个值  有点像{{message}}
 ```
 
 groceryList先被遍历到item中，然后被赋值给todo作为参数传给组件的props，通过模板所以在网页上显示出来
+
+
+
+这里看到有data属性，在vue的异步应用中还经常使用data()方法，类似于mounted()方法，data()方法的值可以绑定到其他元素上使用，第一次看的时候没看懂，这里记录一下
+
+axios得到data放入response中，把response.data 赋值给vue对象data()里的info，就可以绑定在其他元素上使用
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id = "vue">
+    <div>{{info.name}}</div>
+    <div>{{info.address.street}}</div>
+
+</div>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
+<script>
+    var vm =  new Vue({
+        el: '#vue',
+        data(){
+            return{
+                //请求返回的参数必须和json字符串一样
+                info:{
+                    name:null,
+                    address:{
+                        street:null,
+                        city:null,
+                        country:null
+                    },
+                }
+            }
+        },
+        mounted(){//钩子函数 链式编程
+            axios.get('data.json').then(response=>(this.info = response.data));
+        }
+    })
+</script>
+</body>
+</html>
+```
+
+computed 计算属性 与methods类似，里面也是写方法的
+
+computed内的方法通过属性来调（就是不加括号）
+
